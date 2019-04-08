@@ -1,21 +1,34 @@
-import React, { Component } from 'react';
-import { Button, Container, Input } from 'reactstrap';
+import React, {
+  Component
+} from 'react';
+import {
+  Button,
+  Container,
+  Input
+} from 'reactstrap';
 import '../../css/Notepad.css'
 
 class Notepad extends Component {
   constructor(props) {
     super(props);
-    this.state = { code: '' };
+    this.state = {
+      code: ''
+    };
     this.handleUpdate = this.handleUpdate.bind(this);
     this.parseCode = this.parseCode.bind(this);
   }
 
   handleUpdate(e) {
-    this.setState({ code: e.value });
+    this.setState({
+      code: e.target.value
+    });
   }
 
   parseCode(e) {
-    console.log('parse');
+    var lines = (this.state.code).split('\n');
+    console.log(lines);
+    const lineTokens = lines.map(x => x.trim().split(' '));
+    console.log(lineTokens)
   }
 
   render() {
@@ -26,10 +39,10 @@ class Notepad extends Component {
           wrap={'soft'}
           className={'form-control'}
           onChange={this.handleUpdate}
-          value={this.state.code}></textarea>
+          value={this.state.code}>
+        </textarea>
         <Button onClick={this.parseCode}>Run</Button>
       </div>
-
     );
   }
 }
